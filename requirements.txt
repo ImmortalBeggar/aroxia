@@ -1,0 +1,14 @@
+python-telegram-bot[job-queue]
+google-generativeai
+llama-cpp-python
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
+streamlit
+kivy
+kivymd
+pillow
+pydub
+pyyaml
+python-dotenv
+psutil
