@@ -1,0 +1,34 @@
+name: Auto Debug Build APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  auto-debug:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Ensure Docker is available
+      run: |
+        echo "Docker version:" 
+        docker --version || true
+
+    - name: Make auto-debug script executable
+      run: chmod +x .github/scripts/auto_debug_build.sh
+
+    - name: Run auto-debug build
+      run: ./.github/scripts/auto_debug_build.sh
+      env:
+        GITHUB_WORKSPACE: ${{ github.workspace }}
+
+    - name: Upload artifacts (logs & APK)
+      uses: actions/upload-artifact@v3
+      with:
+        name: auto-debug-artifacts
+        path: artifacts
+        retention-days: 30
